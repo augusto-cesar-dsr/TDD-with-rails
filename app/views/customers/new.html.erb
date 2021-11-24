@@ -1,0 +1,14 @@
+<h1>Novo cliente</h1>
+
+<%= form_for( @customer , remote: true) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <%= f.label :phone %>
+  <%= f.text_field :phone %>
+
+<% end %>
