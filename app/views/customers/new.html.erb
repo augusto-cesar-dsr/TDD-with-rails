@@ -1,3 +1,13 @@
+<% if @customer.errors.any? %>
+  <ul>
+    <% @customer.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
 <h1>Novo cliente</h1>
 
 <%= form_for( @customer , remote: true) do |f| %>
@@ -10,5 +20,15 @@
 
   <%= f.label :phone %>
   <%= f.text_field :phone %>
+  
+  <%= f.label :avatar %>
+  <%= f.file_field :avatar %>
+
+  <%= f.label :smoker %> <br />
+  <% {'S': 'Sim', 'N': 'Não'}.each do |key,value| %>
+    <%= f.radio_button :smoker, key %> <%= value %> <br />
+  <% end %>
+
+  <%= f.submit "Criar Cliente" %>
 
 <% end %>

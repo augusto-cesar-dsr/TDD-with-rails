@@ -1,4 +1,28 @@
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
 <h1>Listando Clientes</h1>
+
+<ul>
+  <% @customers.each do |customer| %>
+    <p>
+      <b>Name: </b>
+      <%= customer.name %>
+    </p>
+    <p>
+      <b>Email: </b>
+      <%= customer.email %>
+    </p>
+    <p>
+      <b>Smoker: </b>
+      <%= customer.smoker %>
+    </p>
+    <p>
+      <b>Phone: </b>
+      <%= customer.phone %>
+    </p>
+  <% end %>
+</ul>
 
 <ul>
   <li>
