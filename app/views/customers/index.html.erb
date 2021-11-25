@@ -3,26 +3,27 @@
 <% end %>
 <h1>Listando Clientes</h1>
 
-<ul>
-  <% @customers.each do |customer| %>
-    <p>
-      <b>Name: </b>
-      <%= customer.name %>
-    </p>
-    <p>
-      <b>Email: </b>
-      <%= customer.email %>
-    </p>
-    <p>
-      <b>Smoker: </b>
-      <%= customer.smoker %>
-    </p>
-    <p>
-      <b>Phone: </b>
-      <%= customer.phone %>
-    </p>
+
+<table>
+  <thead>
+    <tr>
+     <td>Nome</td>
+     <td>Email</td>
+     <td>Smoker</td>
+     <td>Phone</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.name %></td>
+      <td><%= customer.email %></td>
+      <td><%= customer.smoker %></td>
+      <td><%= customer.phone %></td>
+    </tr>
+  </tbody>
   <% end %>
-</ul>
+</table>
 
 <ul>
   <li>
