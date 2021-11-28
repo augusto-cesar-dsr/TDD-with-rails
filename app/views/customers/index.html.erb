@@ -18,10 +18,9 @@
     <tr>
       <td><%= customer.name %></td>
       <td><%= customer.email %></td>
-      <td><%= link_to "Mostrar", customer_path(customer) %></td>
+      <td><%= link_to "Mostrar", customer %></td>
       <td><%= link_to "Editar", edit_customer_path(customer) %></td>
-      <td><%= link_to "Excluir", customer, method: :delete %></td>
-      <!--<td><%# link_to "Excluir", customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+      <td><%= link_to "Excluir", customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   </tbody>
   <% end %>

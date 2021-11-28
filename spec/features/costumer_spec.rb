@@ -42,13 +42,7 @@ feature "customers", type: :feature do
   end
 
   scenario 'Mostra um client' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      avatar: "#{Rails.root}/spec/fixtures/avatar.png",
-      smoker: ['S', 'N'].sample
-    )
+    customer = create(:customer)
     visit(customer_path(customer.id))
     expect(page).to have_content(customer.name)
     expect(page).to have_content(customer.email)
@@ -57,33 +51,15 @@ feature "customers", type: :feature do
   end
 
   scenario 'Testando a index' do
-    customer1 = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      avatar: "#{Rails.root}/spec/fixtures/avatar.png",
-      smoker: ['S', 'N'].sample
-    )
-    customer2 = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      avatar: "#{Rails.root}/spec/fixtures/avatar.png",
-      smoker: ['S', 'N'].sample
-    )
+    customer1 = create(:customer)
+    customer2 = create(:customer)
 
     visit(customers_path)
     expect(page).to have_content(customer1.name).and have_content(customer2.name)
   end
 
   scenario 'Mostra um client' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      avatar: "#{Rails.root}/spec/fixtures/avatar.png",
-      smoker: ['S', 'N'].sample
-    )
+    customer = create(:customer)
 
     new_name = Faker::Name.name
     visit(edit_customer_path(customer.id))
@@ -95,13 +71,7 @@ feature "customers", type: :feature do
   end
   
   scenario 'Clica no link mostrar um cliente' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      avatar: "#{Rails.root}/spec/fixtures/avatar.png",
-      smoker: ['S', 'N'].sample
-    )
+    customer = create(:customer)
 
     visit(customers_path)
     find(:xpath, "/html/body/table/tbody/tr[1]/td[3]/a").click
@@ -111,18 +81,23 @@ feature "customers", type: :feature do
   end
 
   scenario 'Clica no link editar um cliente' do
-    customer = Customer.create!(
-      name: Faker::Name.name,
-      email: Faker::Internet.email,
-      phone: Faker::PhoneNumber.phone_number,
-      avatar: "#{Rails.root}/spec/fixtures/avatar.png",
-      smoker: ['S', 'N'].sample
-    )
+    customer = create(:customer)
 
     visit(customers_path)
     find(:xpath, "/html/body/table/tbody/tr[1]/td[4]/a").click
 
     expect(page).to have_content('Atualizando cliente')
+    # expect(page).to have_content(customer.name)
+  end
+
+  scenario 'Clica no link excluir um cliente', js: true do
+    customer = create(:customer)
+
+    visit(customers_path)
+    find(:xpath, "/html/body/table/tbody/tr[1]/td[5]/a").click
+    1.second
+    page.driver.browser.switch_to.alert.accept
+    expect(page).to have_content('Cliente apagado com sucesso!')
     # expect(page).to have_content(customer.name)
   end
 end
